@@ -68,6 +68,7 @@ class API {
             'body' => [
                 'recipientlist_id' => $list,
                 'email' => $email,
+                'status' => 'new',
                 'firstname' => $first_name,
                 'lastname' => $last_name
             ],
