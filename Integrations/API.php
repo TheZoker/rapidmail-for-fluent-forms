@@ -72,10 +72,13 @@ class API {
                 'firstname' => $first_name,
                 'lastname' => $last_name
             ],
-            'send_activationmail' => $send_confirmation_email
         ];
 
-        $response = $this->makeRequest('/recipients', $subscriber, 'POST');
+        $url_args = [
+            'send_activationmail' => $send_confirmation_email,
+        ];
+
+        $response = $this->makeRequest('/recipients', $subscriber, $url_args, 'POST');
 
         if (is_wp_error($response)) {
             return $response;
@@ -88,7 +91,7 @@ class API {
         return new \WP_Error('error', $response->errors);
     }
 
-    public function makeRequest($endpoint, $data = array(), $method = 'GET') {
+    public function makeRequest($endpoint, $data = array(), $url_args = array(), $method = 'GET') {
         $header = array(
             'headers' => array(
                 'Authorization' => 'Basic ' . base64_encode( $this->username . ':' . $this->password ),
@@ -96,6 +99,7 @@ class API {
             )
         );
         $url = $this->apiUrl.$endpoint;
+        $url = add_query_arg($url_args, $url);
 
         if ($method == 'GET') {
             $response = wp_remote_get($url, $header);
