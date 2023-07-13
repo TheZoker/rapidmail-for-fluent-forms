@@ -34,7 +34,6 @@ define('FFRAPIDMAIL_URL', plugin_dir_url(__FILE__));
 
 class FluentFormRapidmail
 {
-
     public function boot()
     {
         if (!defined('FLUENTFORM')) {
@@ -42,7 +41,6 @@ class FluentFormRapidmail
         }
 
         $this->includeFiles();
-
 
         add_action('fluentform/loaded', function ($app) {
             $this->registerHooks($app);
@@ -128,4 +126,4 @@ register_activation_hook(__FILE__, function () {
 
 add_action('plugins_loaded', function () {
     (new FluentFormRapidmail())->boot();
-});
+}, 1);
