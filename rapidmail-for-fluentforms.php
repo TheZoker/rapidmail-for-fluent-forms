@@ -43,9 +43,10 @@ class FluentFormRapidmail
 
         $this->includeFiles();
 
-        if (function_exists('wpFluentForm')) {
-            return $this->registerHooks(wpFluentForm());
-        }
+
+        add_action('fluentform/loaded', function ($app) {
+            $this->registerHooks($app);
+        });
     }
 
     protected function includeFiles()
@@ -54,9 +55,9 @@ class FluentFormRapidmail
         include_once FFRAPIDMAIL_DIR . 'Integrations/API.php';
     }
 
-    protected function registerHooks($fluentForm)
+    protected function registerHooks($app)
     {
-        new \FluentFormRapidmail\Integrations\Bootstrap($fluentForm);
+        new \FluentFormRapidmail\Integrations\Bootstrap($app);
     }
 
     /**

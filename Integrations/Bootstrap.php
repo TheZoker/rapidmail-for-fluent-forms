@@ -2,12 +2,11 @@
 
 namespace FluentFormRapidmail\Integrations;
 
-use FluentForm\App\Services\Integrations\IntegrationManager;
-use FluentForm\Framework\Foundation\Application;
-use FluentForm\Framework\Helpers\ArrayHelper as Arr;
+use FluentForm\App\Http\Controllers\IntegrationManagerController;
+use FluentForm\Framework\Support\Arr;
 
-class Bootstrap extends IntegrationManager {
-    public function __construct(Application $app) {
+class Bootstrap extends IntegrationManagerController {
+    public function __construct($app = null) {
         parent::__construct(
             $app,
             'Rapidmail',
@@ -107,7 +106,6 @@ class Bootstrap extends IntegrationManager {
 		    if (!empty($testCredentials['error']['message'])) {
 			    throw new \Exception($testCredentials['error']['message']);
 		    }
-
 	    } catch (\Exception $exception) {
 		    wp_send_json_error([
 			    'message' => $exception->getMessage()
@@ -226,10 +224,13 @@ class Bootstrap extends IntegrationManager {
         ];
     }
 
+    public function isEnabled()
+    {
+        return true;
+    }
+
     public function getLists() {
-        $api = $this->getRemoteClient();
-        $lists = $api->getRecipientLists();
-        return $lists;
+        return ($this->getRemoteClient())->getRecipientLists();
     }
 
     public function getMergeFields($list = false, $listId = false, $formId = false) {
