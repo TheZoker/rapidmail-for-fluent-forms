@@ -4,7 +4,7 @@ Tags: Integration, Rapidmail, Form, Integration, Fluent Forms
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,10 @@ Install From WordPress Admin Panel:
 
 
 == Changelog ==
+
+= 1.1.0 =
+* Fix incompatibility with FluentForms v5
+* Fix php array access
 
 = 1.0.0 =
 * Init Release

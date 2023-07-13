@@ -252,8 +252,8 @@ class Bootstrap extends IntegrationManagerController {
             return false;
         }
 
-        $send_confirmation_email = Arr::isTrue($data, 'send_confirmation_email') ? 'yes' : 'no';
-        $list = Arr::get($data, 'list_id');
+        $send_confirmation_email = boolval($data['send_confirmation_email']) ? 'yes' : 'no';
+        $list = $data['list_id'];
 
         $api = $this->getRemoteClient();
         $response = $api->subscribe($list, $contact['email'], $contact['first_name'], $contact['last_name'], $send_confirmation_email);

@@ -5,7 +5,7 @@
  * Description: Integrate Rapidmail with Fluentform.
  * Author: Florian Gareis
  * Author URI:  https://gareis.io
- * Version: 1.0.0
+ * Version: 1.1.0
  * Text Domain: ffrapidmail
  */
 
